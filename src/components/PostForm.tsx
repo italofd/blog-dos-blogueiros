@@ -30,7 +30,7 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
 
   const [content, setContent] = useState("");
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const { db } = useContext(FirebaseCtx);
   const { state } = useContext(UserContext);
@@ -41,11 +41,14 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
   useEffect(() => {
     console.log(content);
   }, [content]);
+  useEffect(() => {}, []);
   //Desestruturar o user para adicionar o userpost
   const onSubmit = async (postData: any) => {
     console.log(postData);
     await createPost(postData);
     await insertUserPosts(postData);
+    reset();
+    window.location.reload();
   };
   const createPost = async (postData: any) => {
     const postRef = db.collection("posts").doc();
