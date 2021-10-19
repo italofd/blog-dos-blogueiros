@@ -73,7 +73,6 @@ const theme = extendTheme({
         solid: {
           color: "#EDFDFB",
           bgGradient: "linear(to-r, orange.500, #DE7E17)",
-          transition: "0.25s",
           _hover: "",
           _focus: "",
         },

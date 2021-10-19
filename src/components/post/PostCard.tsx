@@ -77,7 +77,7 @@ const Post: React.FC<any> = ({ post, ...props }) => {
     <Flex
       as="article"
       minH="300px"
-      minW="600px"
+      minW="100%"
       direction="column"
       maxW={{ base: "80%", md: "100%", lg: "100%", xl: "100%" }}
       justify="flex-start"
@@ -88,7 +88,6 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       borderColor="#E88821"
       boxShadow="rgba(232,136,33,0.21) 0px 1px 2px 0px, rgba(232,136,33,0.20) 0px 2px 6px 2px;"
       {...props}
-      
     >
       <Flex>
         <Text fontSize="x-large" mt={4} textColor="green.700">
