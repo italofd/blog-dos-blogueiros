@@ -8,14 +8,14 @@ export interface FirebaseContextType {
   auth: firebase.auth.Auth;
   storage: firebase.storage.Storage;
 }
-
+console.log(process.env.API_KEY);
 const firebaseConfig = {
-  apiKey: "AIzaSyC5JgITAJhbQHxecPBOq8zI-s7sOZMUYcM",
-  authDomain: "blogdosblogueiros-2beb6.firebaseapp.com",
-  projectId: "blogdosblogueiros-2beb6",
-  storageBucket: "blogdosblogueiros-2beb6.appspot.com",
-  messagingSenderId: "826499043853",
-  appId: "1:826499043853:web:d95e9e95ef75fb097f3b44",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
