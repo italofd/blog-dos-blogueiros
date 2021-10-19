@@ -7,8 +7,8 @@ const theme = extendTheme({
         padding: 0,
         margin: 0,
         boxSizing: "border-box",
-        backgroundColor: "neutral.900",
-        color: "neutral.100",
+        backgroundColor: "neutral.50",
+        color: "blue.950",
       },
       button: { color: "neutral.900", textTransform: "uppercase" },
     },
@@ -19,8 +19,10 @@ const theme = extendTheme({
   },
   colors: {
     neutral: {
-      50: "#FBF9EF",
-      100: "#E9F3E2",
+      50: "#F5F4F4",
+      100: "#D8D4D4",
+      150: "#C5BFBF",
+      700: "#152328",
       900: "#1F201D",
     },
     blue: {
@@ -28,6 +30,22 @@ const theme = extendTheme({
       300: "#B7CCB9",
       750: "#051423",
       950: "#040825",
+    },
+    green: {
+      500: "#1C4A40",
+      700: "#233A43",
+      900: "#152328",
+    },
+    red: {
+      400: "#C14953",
+      500: "#A73942",
+    },
+    orange: {
+      400: "#EEA659",
+      500: "#E88821",
+    },
+    yellow: {
+      300: "#FDFD72",
     },
     purple: {
       500: "#B86CE0",
@@ -43,8 +61,8 @@ const theme = extendTheme({
     Button: {
       variants: {
         solid: {
-          color: "#EEF6FC",
-          backgroundColor: "purple.500",
+          color: "#EDFDFB",
+          bgGradient: "linear(to-r, orange.500, #DE7E17)",
         },
       },
     },

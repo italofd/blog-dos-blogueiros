@@ -2,8 +2,7 @@ import React from "react";
 import Postlist from "../components/post/Postlist";
 import Main from "../layouts/Main";
 
-
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <Main>
       <Postlist />

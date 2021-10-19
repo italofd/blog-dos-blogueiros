@@ -7,8 +7,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { IPost } from "../../interface/Post";
 
-const PostAccordion = ({ post }) => {
+const PostAccordion: React.FC<{ post: IPost }> = ({ post }) => {
   return (
     <AccordionItem p={4}>
       <h2>
@@ -23,12 +24,14 @@ const PostAccordion = ({ post }) => {
               xl: "row",
             }}
           >
-            <Text color="white">{post.title}</Text>
+            <Text color="green.900">{post.title}</Text>
           </Box>
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={10}>{post.content}</AccordionPanel>
+      <AccordionPanel pb={10} textColor="green.900" as="h1">
+        {post.content}
+      </AccordionPanel>
     </AccordionItem>
   );
 };
