@@ -18,6 +18,16 @@ const theme = extendTheme({
     "h1, h2, h3, h4, h5, h6": "IBM Plex Sans",
   },
   colors: {
+    teste: {
+      fill: "#a972cb",
+      pulse: "#ef6eae",
+      close: "#ff7f82",
+      raise: "#ffa260",
+      up: " #e4cb58",
+      slide: "#8fc866",
+      offset: "#19bc8b",
+    },
+
     neutral: {
       50: "#F5F4F4",
       100: "#D8D4D4",
@@ -63,6 +73,9 @@ const theme = extendTheme({
         solid: {
           color: "#EDFDFB",
           bgGradient: "linear(to-r, orange.500, #DE7E17)",
+          transition: "0.25s",
+          _hover: "",
+          _focus: "",
         },
       },
     },
