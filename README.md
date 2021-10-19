@@ -2,9 +2,10 @@
 
 *Listar posts
 *Mostrar quantidade de posts
-*Media de palavras por post
+*Mostar todos os likes recebidos em todos os posts feito por determinado usuario
 *Possibilidade de like no post
-\*Visualizar a reputação de cada post
+*Criar novo post
+*Sistema de login e register
 
 -
 
