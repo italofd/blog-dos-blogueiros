@@ -106,7 +106,6 @@ export const UserProvider: React.FC = ({ children }) => {
       if (!user) {
         throw new Error("nao tem dados");
       }
-      console.log("userGetuser", user);
       return user;
     } catch (error: any) {
       throw new Error(error.message);

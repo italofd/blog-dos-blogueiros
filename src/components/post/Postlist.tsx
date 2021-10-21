@@ -17,7 +17,6 @@ const Postlist: React.FC = ({ ...props }) => {
       const res = await db.collection("posts").get();
       const posts = await res.docs.map((doc) => {
         const data = doc.data();
-        console.log("data", data);
         return data;
       });
       setPosts(posts);
@@ -38,7 +37,6 @@ const Postlist: React.FC = ({ ...props }) => {
       color="green.900"
     >
       {posts.map((post) => {
-        console.log("post", post.uid);
         return <PostCard key={post.id} post={post} {...post} />;
       })}
     </Flex>

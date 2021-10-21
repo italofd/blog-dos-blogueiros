@@ -12,6 +12,7 @@ const Post: React.FC<any> = ({ post, ...props }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [postLikes, setPostLikes] = useState(post.likes);
   const [likeFilter, setLikeFilter] = useState();
+  const [postData, setPostData] = useState();
 
   const userId = state.userId as string;
   //Pagina para rotas inacessiveis, 404 page; como fazer formulario de contato com email
@@ -19,6 +20,14 @@ const Post: React.FC<any> = ({ post, ...props }) => {
     if (post.userId) {
       actions.getUser(post.userId).then((res) => setPostUser(res));
     }
+  }, []);
+  useEffect(() => {
+    Object.entries(post.likes).map(([key, value]) => {
+      if (key === userId) {
+        console.log("VALOR USE EFFECT", { key, value });
+        setIsLiked(value as boolean);
+      }
+    });
   }, []);
 
   const getLikes = async () => {
@@ -28,28 +37,18 @@ const Post: React.FC<any> = ({ post, ...props }) => {
 
     const likes = Object.values(postData?.likes);
 
-    const getLikes = await likes.filter((value) => value === true).length;
+    const getLikes = likes.filter((value) => value === true).length;
 
     setLikeFilter(getLikes as any);
     console.log("TESTELIKES", getLikes);
   };
-
-  useEffect(() => {
-    Object.entries(post.likes).map(([key, value]) => {
-      console.log("useeffect", { key, value });
-
-      if (key === userId && value) {
-        setIsLiked(value as boolean);
-      }
-    });
-  }, [post.likes, userId, isLiked]);
 
   const handleLike = async (userId: string, post: any) => {
     const postRef = db.collection("posts").doc(post.uid);
 
     const postData = await postRef.get().then((doc) => doc.data());
 
-    let trackIsLiked: boolean = false;
+    let trackIsLiked: boolean = true;
 
     Object.entries(postData?.likes).map(([key, value]) => {
       console.log("handleLike", { key, value });
@@ -65,13 +64,13 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       uid: post.uid,
       likes: { ...postLikes, [userId]: trackIsLiked },
     });
+    console.log("Boolean que foi para o Firebase:", trackIsLiked);
     return trackIsLiked;
   };
 
   useEffect(() => {
     getLikes();
   }, [post.likes, isLiked, postLikes]);
-  console.log("likeFilter", likeFilter);
 
   return (
     <Flex
@@ -106,8 +105,6 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       <Text fontSize="large" mt={10}>
         {post.content}
       </Text>
-
-      {/* {postLikes !== undefined && postLikes.} */}
       {!isLiked ? (
         <Button
           size="sm"

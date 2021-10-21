@@ -10,7 +10,7 @@ import { FirebaseCtx } from "../contexts/FirebaseContext";
  **[X] Mostrar lista de post nos accordions
  **[X] Mostrar quantidade de posts
  **[X] Mostrar name, imagem
- **[] Mostrar quantidade de likes
+ **[X] Mostrar quantidade de likes
  **[] Mostrar comentarios de cada post
  **[] Mostrar quantidade de comentarios
  */

@@ -13,7 +13,6 @@ import ProfileDetails from "../components/ProfileDetails";
  */
 
 const Profile: React.FC = () => {
-
   const { state, actions } = useContext(UserContext);
 
   const { loggedInUser } = useContext(AuthContext);
@@ -23,7 +22,7 @@ const Profile: React.FC = () => {
   const [image, setImage] = useState<any>(null);
 
   const [url, setUrl] = useState();
-  
+
   const [progress, setProgress] = useState(0);
 
   const handleChange = (e: any) => {
@@ -62,15 +61,26 @@ const Profile: React.FC = () => {
     console.log("stateimage", image);
     console.log("stateurl", url);
     if (url && url !== undefined) {
-      const sla = async () =>
+      const insertImageOnDatabase = async () =>
         await db
           .collection("users")
           .doc(state.userId)
           .set({ ...state.user, image: url });
+      insertImageOnDatabase();
       console.log("poststateurl", url);
-      sla();
+    }
+    if (url !== undefined && image !== null) {
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     }
   }, [url]);
+
+  // useEffect(() => {
+  //   if (progress === 100 && url !== undefined) {
+  //     window.location.reload();
+  //   }
+  // }, [progress, url]);
 
   console.log("image", image);
 
