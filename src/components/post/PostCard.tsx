@@ -16,11 +16,13 @@ const Post: React.FC<any> = ({ post, ...props }) => {
 
   const userId = state.userId as string;
   //Pagina para rotas inacessiveis, 404 page; como fazer formulario de contato com email
+
   useEffect(() => {
     if (post.userId) {
       actions.getUser(post.userId).then((res) => setPostUser(res));
     }
   }, []);
+
   useEffect(() => {
     Object.entries(post.likes).map(([key, value]) => {
       if (key === userId) {
@@ -31,16 +33,18 @@ const Post: React.FC<any> = ({ post, ...props }) => {
   }, []);
 
   const getLikes = async () => {
-    const postRef = db.collection("posts").doc(post.uid);
+    setTimeout(async () => {
+      const postRef = db.collection("posts").doc(post.uid);
 
-    const postData = await postRef.get().then((doc) => doc.data());
+      const postData = await postRef.get().then((doc) => doc.data());
 
-    const likes = Object.values(postData?.likes);
+      const likes = Object.values(postData?.likes);
+      console.log("Valores do PostData.Likes:", likes);
 
-    const getLikes = likes.filter((value) => value === true).length;
+      const getLikes = likes.filter((value) => value === true).length;
 
-    setLikeFilter(getLikes as any);
-    console.log("TESTELIKES", getLikes);
+      setLikeFilter(getLikes as any);
+    }, 400);
   };
 
   const handleLike = async (userId: string, post: any) => {
@@ -70,7 +74,7 @@ const Post: React.FC<any> = ({ post, ...props }) => {
 
   useEffect(() => {
     getLikes();
-  }, [post.likes, isLiked, postLikes]);
+  }, [post.likes, isLiked, postLikes, handleLike]);
 
   return (
     <Flex
