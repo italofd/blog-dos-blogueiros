@@ -86,7 +86,13 @@ const Profile: React.FC = () => {
 
   return (
     <Main>
-      <Text as="h1" textStyle="h1" textAlign="center" pb={16}>
+      <Text
+        as="h1"
+        textStyle="h1"
+        textAlign="center"
+        pb={16}
+        fontFamily="roboto"
+      >
         Profile
       </Text>
       {state.user ? (

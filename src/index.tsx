@@ -6,6 +6,7 @@ import theme from "./theme";
 import "@fontsource/ibm-plex-sans";
 import "@fontsource/inter";
 import "@fontsource/abel";
+import "@fontsource/roboto";
 import "@fontsource/abeezee";
 import { UserProvider } from "./contexts/UserContext";
 import { FirebaseProvider } from "./contexts/FirebaseContext";

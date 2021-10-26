@@ -83,7 +83,7 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
           <DrawerCloseButton />
           <DrawerHeader
             borderBottomWidth="1px"
-            textColor="purple.500"
+            textColor="orange.500"
             textAlign="center"
           >
             CREATE NEW POST
@@ -98,7 +98,7 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
             >
               <FormControl textColor="black">
                 <FormLabel
-                  textColor="purple.500"
+                  textColor="orange.500"
                   fontSize="xl"
                   textAlign="center"
                   mb={2}
@@ -113,13 +113,13 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
                   border="2px"
                   borderColor="#E2E3DE"
                 />
-                <FormErrorMessage textColor="purple.500" mb={4}>
+                <FormErrorMessage textColor="orange.500" mb={4}>
                   Você precisa digitar um titulo!
                 </FormErrorMessage>
               </FormControl>
               <FormControl textColor="black">
                 <FormLabel
-                  textColor="purple.500"
+                  textColor="orange.500"
                   fontSize="xl"
                   textAlign="center"
                 >

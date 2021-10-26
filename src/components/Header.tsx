@@ -6,6 +6,7 @@ import { FaDigitalTachograph } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { AddIcon } from "@chakra-ui/icons";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import NavBar from "./NavBar";
 import { useDisclosure } from "@chakra-ui/hooks";
 import PostForm from "./PostForm";
@@ -124,7 +125,10 @@ const Header: React.FC = () => {
             <Button icon={<AddIcon />} onClick={onOpen}>
               NewPost
             </Button>
-            <Button onClick={handleSignOut}> LogOut </Button>{" "}
+            <Button icon={<RiLogoutBoxRFill />} onClick={handleSignOut}>
+              {" "}
+              LogOut{" "}
+            </Button>{" "}
           </>
         )}
       </Flex>

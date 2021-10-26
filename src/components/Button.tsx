@@ -26,8 +26,7 @@ const Button: React.FC<
       rightIcon={icon}
       {...props}
       variant="solid"
-      fontFamily="Abel"
-      letterSpacing="1px"
+      fontFamily="Roboto"
     >
       {children}{" "}
     </ChakraButton>

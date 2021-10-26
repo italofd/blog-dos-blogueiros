@@ -4,6 +4,7 @@ import { FirebaseCtx } from "../../contexts/FirebaseContext";
 import { UserContext } from "../../contexts/UserContext";
 import { IPost } from "../../interface/Post";
 import { IUser } from "../../interface/User";
+import { FiThumbsUp } from "react-icons/fi";
 
 const Post: React.FC<any> = ({ post, ...props }) => {
   const { actions, state } = useContext(UserContext);
@@ -44,7 +45,7 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       const getLikes = likes.filter((value) => value === true).length;
 
       setLikeFilter(getLikes as any);
-    }, 400);
+    }, 300);
   };
 
   const handleLike = async (userId: string, post: any) => {
@@ -89,10 +90,12 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       //border="3px"
       borderRadius="3px"
       borderColor="#E88821"
-      boxShadow="rgba(232,136,33,0.21) 0px 1px 2px 0px, rgba(232,136,33,0.20) 0px 2px 6px 2px;"
+      boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px
+        13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;"
       {...props}
     >
       <Flex>
+        {" "}
         <Text fontSize="x-large" mt={4} textColor="green.700">
           {postUser !== undefined && postUser.username}
         </Text>
@@ -106,32 +109,46 @@ const Post: React.FC<any> = ({ post, ...props }) => {
           ]
         </Text>
       </Flex>
-      <Text fontSize="large" mt={10}>
+      <Text fontSize="large" mt={4}>
         {post.content}
       </Text>
-      {!isLiked ? (
-        <Button
-          size="sm"
-          w="20%"
-          mt={4}
-          onClick={() => handleLike(userId, post)}
-          variant="solid"
-        >
-          Like
-        </Button>
-      ) : (
-        <Button
-          size="sm"
-          w="20%"
-          mt={4}
-          onClick={() => handleLike(userId, post)}
-          variant="outline"
-        >
-          {} Likes
-        </Button>
-      )}
-      <Text fontSize="lg"> {likeFilter} </Text>
-      <Image src={postUser?.image} alignSelf="end" boxSize="80px" />
+
+      <Flex flexDirection="row" justify="space-between" align="end" pt={10}>
+        {!isLiked ? (
+          <>
+            <Button
+              size="sm"
+              w="15%"
+              mt={4}
+              onClick={() => handleLike(userId, post)}
+              variant="solid"
+            >
+              <FiThumbsUp /> <Text ml={2}> Like : {likeFilter} </Text>
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              size="sm"
+              w="15%"
+              mt={4}
+              onClick={() => handleLike(userId, post)}
+              variant="outline"
+              borderColor="orange.500"
+            >
+              <FiThumbsUp /> <Text ml={2}>Like : {likeFilter}</Text>
+            </Button>
+          </>
+        )}{" "}
+        <Image
+          src={postUser?.image}
+          alignSelf="end"
+          boxSize="80px"
+          borderRadius="50%"
+          border="2px"
+          borderColor="orange.500"
+        />
+      </Flex>
     </Flex>
   );
 };
