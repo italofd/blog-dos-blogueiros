@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { IUser } from "../interface/User";
 import { AuthContext } from "./AuthContext";
 import { FirebaseCtx } from "./FirebaseContext";
-//Fazer useEffect para checkar se o auth.currentUser nao é nulo, se não for comparar os dois ids e depois renderizar, se for nulo nao renderize
+
 export interface UserContextType {
   state: {
     user: IUser | null;
@@ -16,6 +16,7 @@ export interface UserContextType {
     getUser: (userId: string) => Promise<IUser>;
   };
 }
+
 export interface RegisterDTO {
   name: string;
   username: string;
@@ -56,7 +57,7 @@ export const UserProvider: React.FC = ({ children }) => {
         posts: [],
         image: "",
       };
-      console.log("signUP", user);
+
       const response = await auth.createUserWithEmailAndPassword(
         email,
         password
@@ -122,7 +123,6 @@ export const UserProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (userId && userId !== undefined) {
       getUser(userId).then((res: any) => setUser(res));
-      console.log("useeffectuser", user);
     }
   }, [userId]);
 
@@ -131,6 +131,7 @@ export const UserProvider: React.FC = ({ children }) => {
     users,
     userId,
   };
+
   const actions = {
     setUsers,
     createUser,

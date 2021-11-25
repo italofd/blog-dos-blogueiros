@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/modal";
 import { DrawerBody } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/textarea";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FirebaseCtx } from "../contexts/FirebaseContext";
 import { UserContext } from "../contexts/UserContext";
@@ -26,25 +26,12 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
   onOpen,
   onClose,
 }) => {
-  const [title, setTitle] = useState("");
-
-  const [content, setContent] = useState("");
-
   const { register, handleSubmit, reset } = useForm();
 
   const { db } = useContext(FirebaseCtx);
   const { state } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(title);
-  }, [title]);
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
-  useEffect(() => {}, []);
-  //Desestruturar o user para adicionar o userpost
   const onSubmit = async (postData: any) => {
-    console.log(postData);
     await createPost(postData);
     await insertUserPosts(postData);
     reset();
@@ -53,7 +40,6 @@ const Postform: React.FC<{ isOpen: any; onOpen: any; onClose: any }> = ({
   const createPost = async (postData: any) => {
     const postRef = db.collection("posts").doc();
     const postId = postRef.id;
-    console.log("postData", postData);
     await postRef.set({
       userId: state.userId,
       title: postData.title,

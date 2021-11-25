@@ -1,8 +1,7 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import React, { useContext } from "react";
 import Main from "../layouts/Main";
-import { FaArrowDown } from "react-icons/fa";
-import Icon from "@chakra-ui/icon";
+
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 import { useForm } from "react-hook-form";
@@ -36,7 +35,7 @@ const Register: React.FC = () => {
         {" "}
         Registre-se abaixo
       </Text>
-      {/* <Icon as={FaArrowDown} w={16} h={16} color="orange.500" mb={12} ml={80} /> */}
+
       <Flex
         as="form"
         onSubmit={handleSubmit(onSubmit)}

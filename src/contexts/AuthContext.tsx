@@ -6,7 +6,6 @@ import { UserContext } from "./UserContext";
 
 type LoggedInUser = firebase.User | null | undefined;
 export interface AuthContextType {
-  loginWithGoogle: () => Promise<void>;
   loggedInUser: LoggedInUser | undefined;
   signOut: () => Promise<void>;
 }
@@ -16,18 +15,6 @@ export const AuthContext = createContext({} as AuthContextType);
 export const AuthProvider: React.FC = ({ children }) => {
   const [loggedInUser, setloggedInUser] = useState<LoggedInUser | null>(null);
   const firebaseCtx = useContext(FirebaseCtx);
-  const { auth } = useContext(FirebaseCtx);
-  const { state } = useContext(UserContext);
-
-  const history = useHistory();
-
-  const loginWithGoogle = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    const result = await firebaseCtx.auth.signInWithPopup(provider);
-    console.log("resultado", result);
-    result.user && setloggedInUser(result.user);
-  };
 
   useEffect(() => {
     const unsubscribe = firebaseCtx.auth.onAuthStateChanged((user) => {
@@ -48,7 +35,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loginWithGoogle, loggedInUser, signOut }}>
+    <AuthContext.Provider value={{ loggedInUser, signOut }}>
       {children}
     </AuthContext.Provider>
   );

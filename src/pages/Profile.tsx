@@ -2,20 +2,11 @@ import { Text, Spinner } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import Main from "../layouts/Main";
 import { UserContext } from "../contexts/UserContext";
-import { AuthContext } from "../contexts/AuthContext";
 import { FirebaseCtx } from "../contexts/FirebaseContext";
 import ProfileDetails from "../components/ProfileDetails";
 
-/**
- **[] Mostrar imagem grande do usuario
- **[] Mostrar todas as informações do usuario
- **[]
- */
-
 const Profile: React.FC = () => {
   const { state, actions } = useContext(UserContext);
-
-  const { loggedInUser } = useContext(AuthContext);
 
   const { storage, db } = useContext(FirebaseCtx);
 
@@ -30,6 +21,11 @@ const Profile: React.FC = () => {
       setImage(e.target.files[0]);
     }
   };
+  useEffect(() => {
+    if (state.userId) {
+      actions.getUser(state.userId);
+    }
+  }, []);
 
   const handleUpload = (image: any) => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -51,15 +47,12 @@ const Profile: React.FC = () => {
           .getDownloadURL()
           .then((url) => {
             setUrl(url);
-            console.log("function url", url);
           });
       }
     );
   };
 
   useEffect(() => {
-    console.log("stateimage", image);
-    console.log("stateurl", url);
     if (url && url !== undefined) {
       const insertImageOnDatabase = async () =>
         await db
@@ -67,7 +60,6 @@ const Profile: React.FC = () => {
           .doc(state.userId)
           .set({ ...state.user, image: url });
       insertImageOnDatabase();
-      console.log("poststateurl", url);
     }
     if (url !== undefined && image !== null) {
       setTimeout(function () {
@@ -75,14 +67,6 @@ const Profile: React.FC = () => {
       }, 2000);
     }
   }, [url]);
-
-  // useEffect(() => {
-  //   if (progress === 100 && url !== undefined) {
-  //     window.location.reload();
-  //   }
-  // }, [progress, url]);
-
-  console.log("image", image);
 
   return (
     <Main>

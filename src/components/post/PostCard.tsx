@@ -2,7 +2,6 @@ import { Flex, Text, Button, Image } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { FirebaseCtx } from "../../contexts/FirebaseContext";
 import { UserContext } from "../../contexts/UserContext";
-import { IPost } from "../../interface/Post";
 import { IUser } from "../../interface/User";
 import { FiThumbsUp } from "react-icons/fi";
 
@@ -25,9 +24,9 @@ const Post: React.FC<any> = ({ post, ...props }) => {
   }, []);
 
   useEffect(() => {
+    if (post.likes === undefined) return;
     Object.entries(post.likes).map(([key, value]) => {
       if (key === userId) {
-        console.log("VALOR USE EFFECT", { key, value });
         setIsLiked(value as boolean);
       }
     });
@@ -39,8 +38,9 @@ const Post: React.FC<any> = ({ post, ...props }) => {
 
       const postData = await postRef.get().then((doc) => doc.data());
 
+      if (postData === undefined || null) return;
+
       const likes = Object.values(postData?.likes);
-      console.log("Valores do PostData.Likes:", likes);
 
       const getLikes = likes.filter((value) => value === true).length;
 
@@ -56,9 +56,7 @@ const Post: React.FC<any> = ({ post, ...props }) => {
     let trackIsLiked: boolean = true;
 
     Object.entries(postData?.likes).map(([key, value]) => {
-      console.log("handleLike", { key, value });
       trackIsLiked = !value as boolean;
-      console.log("trackIsliked", trackIsLiked);
       setIsLiked(trackIsLiked);
     });
 
@@ -69,13 +67,16 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       uid: post.uid,
       likes: { ...postLikes, [userId]: trackIsLiked },
     });
-    console.log("Boolean que foi para o Firebase:", trackIsLiked);
     return trackIsLiked;
   };
 
   useEffect(() => {
     getLikes();
   }, [post.likes, isLiked, postLikes, handleLike]);
+
+  useEffect(() => {
+    getLikes();
+  }, []);
 
   return (
     <Flex
@@ -87,11 +88,10 @@ const Post: React.FC<any> = ({ post, ...props }) => {
       justify="flex-start"
       p={8}
       my={8}
-      //border="3px"
       borderRadius="3px"
       borderColor="#E88821"
       boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px
-        13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;"
+      13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;"
       {...props}
     >
       <Flex>

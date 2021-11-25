@@ -15,7 +15,6 @@ const Footer: React.FC = () => {
       align="center"
       position="static"
       bottom="0"
-      /*borderTop="3px solid #EEA659"*/
       px={4}
       mt={12}
       mb={16}

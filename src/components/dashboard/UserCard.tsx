@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FirebaseCtx } from "../../contexts/FirebaseContext";
-import { UserContext, UserProvider } from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
 import { IUser } from "../../interface/User";
 
@@ -18,7 +18,6 @@ const UserCard: React.FC<{ user: IUser }> = ({ user }) => {
       .get();
     const postQty = postRef.size;
     setUserPostsQty(postQty as any);
-    console.log("postRef", postQty);
   };
   userPosts();
 
@@ -36,8 +35,6 @@ const UserCard: React.FC<{ user: IUser }> = ({ user }) => {
       return a + b;
     }, 0);
     setTotalOfLikes(countLikes as any);
-    console.log("sla", arrayOfLikes);
-    console.log("countLikes", countLikes);
   };
   allUserLikes();
 
@@ -50,7 +47,6 @@ const UserCard: React.FC<{ user: IUser }> = ({ user }) => {
       borderRadius="5px"
       maxW={{ base: "100%", md: "100%", lg: "100%", xl: "100%" }}
     >
-      {user === null ? "" : console.log("user", user)}
       <Box padding={4} w="100%" align="center">
         <Image
           src={user && user.image}

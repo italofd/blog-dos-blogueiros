@@ -1,27 +1,24 @@
-import { Box, Flex, IconButton, Heading, Text } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
-import Button from "./Button";
+import { useHistory } from "react-router";
 import { FaHome } from "react-icons/fa";
 import { FaDigitalTachograph } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import { AddIcon } from "@chakra-ui/icons";
 import { RiLogoutBoxRFill } from "react-icons/ri";
-import NavBar from "./NavBar";
+import { AddIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Heading } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import PostForm from "./PostForm";
 import { AuthContext } from "../contexts/AuthContext";
-import { useHistory } from "react-router";
-import { FirebaseCtx } from "../contexts/FirebaseContext";
+import NavBar from "./NavBar";
+import Button from "./Button";
 
 export interface span {
   span: any;
 }
 
 const Header: React.FC = () => {
-  const { loginWithGoogle, loggedInUser, signOut } = useContext(AuthContext);
-
-  const { auth } = useContext(FirebaseCtx);
+  const { loggedInUser, signOut } = useContext(AuthContext);
 
   const history = useHistory();
 

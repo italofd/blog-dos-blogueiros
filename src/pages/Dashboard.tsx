@@ -6,22 +6,11 @@ import Main from "../layouts/Main";
 import { UserContext } from "../contexts/UserContext";
 import { FirebaseCtx } from "../contexts/FirebaseContext";
 
-/**
- **[X] Mostrar lista de post nos accordions
- **[X] Mostrar quantidade de posts
- **[X] Mostrar name, imagem
- **[X] Mostrar quantidade de likes
- **[] Mostrar comentarios de cada post
- **[] Mostrar quantidade de comentarios
- */
-
 const Dashboard: React.FC = () => {
   const userCtx = useContext(UserContext);
   const { state, actions } = useContext(UserContext);
   const { db } = useContext(FirebaseCtx);
   const [userPosts, setUserPosts] = useState<any[]>([]);
-
-  console.log("DashbordUser", state.userId);
 
   const getUserPosts = async () => {
     const foo = await db
@@ -30,14 +19,13 @@ const Dashboard: React.FC = () => {
       .get();
     const posts = foo.docs.map((doc) => {
       const data = doc.data();
-      console.log("UserPosts", data);
       return data;
     });
     setUserPosts(posts);
   };
   useEffect(() => {
     if (state.userId && state.userId !== undefined) getUserPosts();
-  }, []);
+  }, [userCtx.state.userId]);
 
   return (
     <Main>
